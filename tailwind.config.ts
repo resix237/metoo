@@ -16,15 +16,35 @@ const config: Config = {
       },
       colors:{
         primary:"#B099E0",
-        secondary:"#3C1981",
-        accent:"#1F005C",
+        secondary:"#18083C",
+        accent:"#2E1656",
         background:"#0E0A17",
         text:"#EEEBF3"
-  
+
       },
       fontFamily: {
         Montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
+      animation:{
+        bold: " bold 10s infinite"
+      },
+      keyframes:{
+        bold:{
+          "0%":{
+            transform:"translate(0px,0px) scale(1)"
+          },
+          "33%":{
+            transform:"translate(30px,-50px) scale(1.3)"
+          },
+          "66%":{
+            transform:"translate(-20px,20px)scale(0.8)"
+          },
+          "100%":{
+            transform:"translate(0px,0px) scale(1)"
+          }
+
+        }
+      }
     },
    
   },

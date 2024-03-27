@@ -1,0 +1,226 @@
+"use client"
+import ButtonMenu from "@/components/ui/ButtonMenu";
+import Image from "next/image"
+import { useEffect, useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import scrollTrigger from "gsap/ScrollTrigger";
+import SplitText from "../utils/Split3.min";
+
+export default function Home() {
+
+  const comp = useRef(null)
+  useLayoutEffect(() => {
+    gsap.registerPlugin(scrollTrigger)
+    let ctx = gsap.context(() => {
+      const t1 = gsap.timeline()
+      t1.to("#preview-home", {
+        yPercent: "-100",
+        duration: 1.3,
+        delay: 0.3,
+        ease: "power2",
+      })
+    }, comp);
+    const split = new SplitText(".header-text", {
+      type: "words,lines",
+      linesClass: "lineChildren",
+    });
+    const splitParent = new SplitText(".header-text", {
+      type: "lines",
+      linesClass: "lineParent",
+    });
+    // gsap.to(split.lines, {
+    //   duration: 1,
+    //   y: 0,
+    //   opacity: 1,
+    //   stagger: 0.1,
+    //   delay: 0.3,
+    //   ease: "power4",
+    // });
+
+    const gsapText = gsap.utils.toArray(".header-text");
+    gsapText.forEach((gspItem) => {
+      const wordItem = gspItem.querySelectorAll("div");
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: gspItem,
+          start: "top 90%",
+          end: "70% 80%",
+          toggleActions: "restart none none none"
+        }
+      });
+      tl.to(wordItem, {
+        duration: 1,
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        delay: 0.3,
+        ease: "power4",
+      });
+    })
+    return () => ctx.revert();
+
+  }, [])
+  return (
+    <main ref={comp} className=" xl:px-64 px-10 lg:px-32 transition-all ease-in-out duration-100 relative">
+      <div id="preview-home" className=" bg-white absolute top-0 left-0 h-screen w-full z-10 flex justify-center place-items-center">
+        <h1>
+          loading ...
+        </h1>
+
+      </div>
+      <div>
+        <div className="flex w-full justify-between py-10 place-items-center">
+          <h1 className=" font-Montserrat text-white text-xl font-light uppercase  ">
+            Marc Fouda
+          </h1>
+
+          <ButtonMenu />
+
+        </div>
+        <div className=" grid lg:grid-cols-2 pt-20" >
+          <div className=" text-6xl text-white font-Montserrat " >
+            <span className=" overflow-hidden h-12">
+              <span className="header-text"> Hi I'm Marc Fouda</span>
+            </span>
+            <br />
+            <p className="header-text">
+              But You can call me Resix
+            </p>
+          </div>
+          <div className=" relative pt-10 justify-center place-items-center flex  ">
+            <div className=" animate-bold animation-delay-3000 lg:absolute opacity-80 filter blur-3xl min-h-96 lg:right-[50%] min-w-96 rounded-full bg-accent ">
+            </div>
+            <div className=" animate-bold lg:absolute opacity-70 filter blur-3xl min-h-96  lg:-bottom-20 lg:-left-10 min-w-96 rounded-full bg-accent ">
+            </div>
+            <div className=" animate-bold animation-delay-2000 lg:absolute opacity-70 filter blur-3xl min-h-96  lg:right-[30%] min-w-96 rounded-full bg-secondary ">
+            </div>
+            <div className=" animate-bold lg:absolute opacity-70 filter blur-3xl min-h-96  lg:right-[10%] min-w-96 rounded-full bg-secondary ">
+            </div>
+            <div className=" animate-bold  animation-delay-4000 lg:absolute opacity-70 filter blur-3xl min-h-96  lg:-bottom-4 lg:left-20 min-w-96 rounded-full bg-secondary ">
+            </div>
+
+
+
+
+          </div>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>  <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+        <div className=" text-6xl text-white font-Montserrat " >
+          <span className=" overflow-hidden h-12">
+            <span className="header-text"> Hi I'm Marc Fouda</span>
+          </span>
+          <br />
+          <p className="header-text">
+            But You can call me Resix
+          </p>
+        </div>
+      </div>
+    </main>
+  );
+}
