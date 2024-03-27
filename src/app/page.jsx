@@ -15,16 +15,16 @@ export default function Home() {
       const t1 = gsap.timeline()
       t1.to("#preview-home", {
         yPercent: "-100",
-        duration: 1.3,
+        duration: .8,
         delay: 0.3,
         ease: "power2",
       })
     }, comp);
-    const split = new SplitText(".header-text", {
-      type: "words,lines",
+    const split = new SplitText(".animate-text", {
+      type: "lines",
       linesClass: "lineChildren",
     });
-    const splitParent = new SplitText(".header-text", {
+    const splitParent = new SplitText(".animate-text", {
       type: "lines",
       linesClass: "lineParent",
     });
@@ -37,7 +37,7 @@ export default function Home() {
     //   ease: "power4",
     // });
 
-    const gsapText = gsap.utils.toArray(".header-text");
+    const gsapText = gsap.utils.toArray(".animate-text");
     gsapText.forEach((gspItem) => {
       const wordItem = gspItem.querySelectorAll("div");
       let tl = gsap.timeline({
@@ -53,7 +53,7 @@ export default function Home() {
         y: 0,
         opacity: 1,
         stagger: 0.1,
-        delay: 0.3,
+        delay: 0.4,
         ease: "power4",
       });
     })
@@ -62,7 +62,7 @@ export default function Home() {
   }, [])
   return (
     <main ref={comp} className=" xl:px-64 px-10 lg:px-32 transition-all ease-in-out duration-100 relative">
-      <div id="preview-home" className=" bg-white absolute top-0 left-0 h-screen w-full z-10 flex justify-center place-items-center">
+      <div id="preview-home" className="bg-white absolute top-0 left-0 h-screen  w-full z-10 flex justify-center place-items-center">
         <h1>
           loading ...
         </h1>
@@ -78,147 +78,31 @@ export default function Home() {
 
         </div>
         <div className=" grid lg:grid-cols-2 pt-20" >
-          <div className=" text-6xl text-white font-Montserrat " >
-            <span className=" overflow-hidden h-12">
-              <span className="header-text"> Hi I'm Marc Fouda</span>
+          <div className=" text-6xl text-white font-Montserrat flex flex-col  gap-3 " >
+            <span className="">
+              <span className="animate-text"> Hi I'm Marc Fouda</span>
             </span>
-            <br />
-            <p className="header-text">
-              But You can call me Resix
-            </p>
+            <span className="animate-text text-2xl">
+              I answer to the name Resix,
+            </span>
+            <span className="animate-text text-2xl">Sculter de pixels</span>
           </div>
-          <div className=" relative pt-10 justify-center place-items-center flex  ">
-            <div className=" animate-bold animation-delay-3000 lg:absolute opacity-80 filter blur-3xl min-h-96 lg:right-[50%] min-w-96 rounded-full bg-accent ">
+          <div className=" relative pt-10 justify-center place-items-center lg:flex hidden ">
+            <div className=" animate-bold animation-delay-3000 absolute opacity-80 filter blur-3xl min-h-96 right-[50%] min-w-96 rounded-full bg-accent ">
             </div>
-            <div className=" animate-bold lg:absolute opacity-70 filter blur-3xl min-h-96  lg:-bottom-20 lg:-left-10 min-w-96 rounded-full bg-accent ">
+            <div className=" animate-bold absolute opacity-70 filter blur-3xl min-h-96  -bottom-20 -left-10 min-w-96 rounded-full bg-accent ">
             </div>
-            <div className=" animate-bold animation-delay-2000 lg:absolute opacity-70 filter blur-3xl min-h-96  lg:right-[30%] min-w-96 rounded-full bg-secondary ">
+            <div className=" animate-bold animation-delay-2000 labsolute opacity-70 filter blur-3xl min-h-96  right-[30%] min-w-96 rounded-full bg-secondary ">
             </div>
-            <div className=" animate-bold lg:absolute opacity-70 filter blur-3xl min-h-96  lg:right-[10%] min-w-96 rounded-full bg-secondary ">
+            <div className=" animate-bold absolute opacity-70 filter blur-3xl min-h-96  right-[10%] min-w-96 rounded-full bg-secondary ">
             </div>
-            <div className=" animate-bold  animation-delay-4000 lg:absolute opacity-70 filter blur-3xl min-h-96  lg:-bottom-4 lg:left-20 min-w-96 rounded-full bg-secondary ">
+            <div className=" animate-bold  animation-delay-4000 absolute opacity-70 filter blur-3xl min-h-96  -bottom-4 lg:left-20 min-w-96 rounded-full bg-secondary ">
             </div>
 
 
 
 
           </div>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>  <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
-        </div>
-        <div className=" text-6xl text-white font-Montserrat " >
-          <span className=" overflow-hidden h-12">
-            <span className="header-text"> Hi I'm Marc Fouda</span>
-          </span>
-          <br />
-          <p className="header-text">
-            But You can call me Resix
-          </p>
         </div>
       </div>
     </main>

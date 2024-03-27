@@ -24,6 +24,7 @@ const config: Config = {
       },
       fontFamily: {
         Montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        Hind: ["Hind", ...defaultTheme.fontFamily.sans],
       },
       animation:{
         bold: " bold 10s infinite"

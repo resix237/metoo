@@ -96,7 +96,9 @@ export default function RootLayout({
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mukta+Mahee:wght@200;300;400;500;600;700;800&family=Questrial&display=swap" rel="stylesheet"></link>
-
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
 
       <body className={inter.className}>
         {/* <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText3.min.js">
