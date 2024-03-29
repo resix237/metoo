@@ -62,14 +62,14 @@ export default function Home() {
   }, [])
   return (
     <main ref={comp} className=" xl:px-64 px-10 lg:px-32 transition-all ease-in-out duration-100 relative">
-      <div id="preview-home" className="bg-white absolute top-0 left-0 h-screen  w-full z-10 flex justify-center place-items-center">
+      <div id="preview-home" className="bg-white absolute top-0 left-0 h-screen  w-full z-50 flex justify-center place-items-center">
         <h1>
           loading ...
         </h1>
 
       </div>
       <div>
-        <div className="flex w-full justify-between py-10 place-items-center">
+        <div className="flex w-full justify-between py-14 place-items-center">
           <h1 className=" font-Montserrat text-white text-xl font-light uppercase  ">
             Marc Fouda
           </h1>

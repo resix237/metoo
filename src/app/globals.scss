@@ -28,6 +28,7 @@ body {
   pointer-events: none;
   z-index: 99999999;
 }
+
 .reveal {
   rotate: none;
   scale: none;
@@ -73,9 +74,9 @@ body {
   }
 }
 
-.lineParent{
+.lineParent {
   overflow: hidden;
-  .lineChildren{
+  .lineChildren {
     transform: translate(0, 500px);
   }
 }
