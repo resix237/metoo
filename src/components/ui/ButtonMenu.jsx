@@ -125,7 +125,7 @@ function ButtonMenu() {
                         </div>
                     </div>
 
-                    <div className='absolute bottom-10 left-0 h-10 w-full lg:pl-0 lg:pr-10 px-10 pb-10 overflow-hidden  '>
+                    <div className='absolute bottom-10 left-0 h-16 w-full lg:pl-0 lg:pr-10 px-10 pb-10 overflow-hidden  '>
                         <div className=' w-full  h-[1px] bg-white menu opacity-0  translate-y-10 '></div>
                         <div className='relative menu opacity-0  translate-y-10 pt-5 lg:pr-10  flex w-full justify-between lg:text-lg text-md uppercase text-white'>
                             <span>Linkedin</span>
