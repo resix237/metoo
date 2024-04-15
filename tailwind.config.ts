@@ -27,7 +27,8 @@ const config: Config = {
         Hind: ["Hind", ...defaultTheme.fontFamily.sans],
       },
       animation:{
-        bold: " bold 10s infinite"
+        bold: " bold 10s infinite",
+        spher:" spher 10s infinite"
       },
       keyframes:{
         bold:{
@@ -44,11 +45,32 @@ const config: Config = {
             transform:"translate(0px,0px) scale(1)"
           }
 
+        },
+        spher: {
+          '0%': {
+            transform: 'translate(0px, 0px) rotate(0deg) '
+          },
+          '25%': {
+            transform: 'translate(-80px, 30px) rotate(0deg) '
+          },
+          '50%': {
+            transform: 'translate(-120px, 10px) rotate(15deg) '
+          },
+          '75%': {
+            transform: 'translate(-80px, -30px) rotate(5deg) '
+          },
+          '100%': {
+            transform: 'translate(0px,0px) rotate(0deg) '
+          }
         }
-      }
+      },
+      screens: {
+        'xs': '400px',
+  
     },
    
   },
   plugins: [],
-};
+}
+}
 export default config;

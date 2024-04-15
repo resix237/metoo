@@ -2,6 +2,9 @@
 import { Inter } from "next/font/google";
 import { useEffect, useLayoutEffect } from "react";
 import "./globals.scss";
+import Curve from "../components/Curve";
+import Footer from "../components/Footer";
+import { AnimatePresence } from 'framer-motion'
 
 const inter = Inter({ subsets: [ "latin" ] });
 const ratio = 0.1;
@@ -80,7 +83,6 @@ export default function RootLayout({
       });
     })
 
-
     const observer = new IntersectionObserver(handleIntersect, options);
     document.querySelectorAll(".reveal").forEach((element) => {
       observer.observe(element);
@@ -89,6 +91,14 @@ export default function RootLayout({
     return () => observer.disconnect();
 
   }, []);
+  useEffect(() => {
+    (
+      async () => {
+        const LocomotiveScroll = (await import('locomotive-scroll')).default
+        const locomotiveScroll = new LocomotiveScroll();
+      }
+    )()
+  }, [])
 
   return (
     <html lang="en">
@@ -103,28 +113,30 @@ export default function RootLayout({
         {/* <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText3.min.js">
 
         </script> */}
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+        <div className="circle md:block hidden"></div>
+
         {children}
 
+        <Footer />
       </body>
     </html>
   );
