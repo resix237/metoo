@@ -52,7 +52,7 @@ function Carrousel({ data }: CarrouselProps) {
 
                     {
                         data?.map((item, index) => (
-                            <SwiperSlide className=' border-2 border-accent bg-black shadow-xl shadow-accent '>
+                            <SwiperSlide key={index} className=' border-2 border-accent bg-black shadow-xl shadow-accent '>
                                 <ItemCarrousel data={item} />
                             </SwiperSlide>
                         ))

@@ -81,6 +81,8 @@ body {
   overflow: hidden;
   .lineChildren {
     transform: translate(0, 500px);
+    transition: all;
+    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
   }
 }
 

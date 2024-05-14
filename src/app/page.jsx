@@ -25,8 +25,8 @@ export default function Home() {
       const t1 = gsap.timeline()
       t1.to("#preview-home", {
         yPercent: "-100",
-        duration: .8,
-        delay: 0.3,
+        duration: .9,
+        delay: 0.5,
         ease: "power2",
       })
     }, comp);
@@ -72,6 +72,16 @@ export default function Home() {
     }
     fetchData();
   }, [])
+  // useEffect(() => {
+  //   gsap.to(".green", {
+  //     rotation: 900,
+  //     duration: 1,
+  //     scrollTrigger: {
+  //       scrub: 5,
+  //       markers: false,
+  //     }
+  //   });
+  // }, [])
   return (
     <Fragment>
 
@@ -84,14 +94,9 @@ export default function Home() {
 
         </div>
         <div>
-          <div className="flex w-full justify-between py-14 place-items-center">
-            <h1 className=" font-Montserrat text-white text-xl font-light uppercase  ">
-              Marc Fouda
-            </h1>
-
-            <ButtonMenu />
-
-          </div>
+          <h1 className=" py-20 font-Montserrat text-white text-xl font-light uppercase   ">
+            Marc Fouda
+          </h1>
           <div className=" grid grid-cols-1 lg:grid-cols-2 pt-20" >
             <div className=" md:text-6xl text-2xl text-white font-Montserrat flex flex-col  gap-3 relative " >
               <Image
@@ -108,7 +113,7 @@ export default function Home() {
               <span className="">
                 <span className="animate-text"> Hi I'm Marc Fouda</span>
               </span>
-              <span className="animate-text md:text-2xl text-lg ">
+              <span className=" animate-text md:text-2xl text-lg ">
                 I answer to the name Resix,
               </span>
               <span className="animate-text text-sm md:text-xl font-bold tracking-wider flex place-items-center "><span className=" font-bold text-lg md:text-2xl">{`<`}</span> Sculteur_de_pixels <span className=" font-bold text-lg md:text-2xl">{`/>`}</span></span>
@@ -146,7 +151,7 @@ export default function Home() {
           src={'/img/grid.svg'}
           width={170}
           height={170}
-          className=" absolute -z-10 bottom-20 right-40 "
+          className=" absolute -z-10 bottom-20 right-40 green "
           alt="linkedin"
           priority={true}
 

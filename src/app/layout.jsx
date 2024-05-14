@@ -4,7 +4,8 @@ import { useEffect, useLayoutEffect } from "react";
 import "./globals.scss";
 import Curve from "../components/Curve";
 import Footer from "../components/Footer";
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion';
+import ButtonMenu from "@/components/ui/ButtonMenu";
 
 const inter = Inter({ subsets: [ "latin" ] });
 const ratio = 0.1;
@@ -134,6 +135,12 @@ export default function RootLayout({
         <div className="circle md:block hidden"></div>
         <div className="circle md:block hidden"></div>
 
+        <div className="flex absolute top-0 left-0 w-full justify-between py-14 place-items-center">
+
+
+          <ButtonMenu />
+
+        </div>
         {children}
 
         <Footer />

@@ -2,7 +2,9 @@ import React from 'react'
 
 function Page() {
     return (
-        <div>Contact</div>
+        <div>
+            contact
+        </div>
     )
 }
 
