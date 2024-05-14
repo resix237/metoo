@@ -72,16 +72,6 @@ export default function Home() {
     }
     fetchData();
   }, [])
-  // useEffect(() => {
-  //   gsap.to(".green", {
-  //     rotation: 900,
-  //     duration: 1,
-  //     scrollTrigger: {
-  //       scrub: 5,
-  //       markers: false,
-  //     }
-  //   });
-  // }, [])
   return (
     <Fragment>
 
@@ -111,7 +101,7 @@ export default function Home() {
 
 
               <span className="">
-                <span className="animate-text"> Hi I'm Marc Fouda</span>
+                <span className="animate-text"> Hi I&rsquo;m Marc Fouda</span>
               </span>
               <span className=" animate-text md:text-2xl text-lg ">
                 I answer to the name Resix,
