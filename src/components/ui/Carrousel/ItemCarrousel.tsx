@@ -8,6 +8,8 @@ interface ItemCarrouselProps {
     data: ResponseScrapping
 }
 function ItemCarrousel({ data }: ItemCarrouselProps) {
+    console.log(data);
+
     return (
 
         <a target="_blank" href="https://www.linkedin.com/in/fouda-marc-arthur-03372a239/recent-activity/all/" rel="noopener noreferrer">
@@ -24,25 +26,25 @@ function ItemCarrousel({ data }: ItemCarrouselProps) {
                             priority={true}
 
                         /> :
-                            data?.video ?
-                                <video
-                                    className=' h-full w-full object-cover'
-                                    preload="metadata"
-                                    poster={data?.video}
-                                    src={data?.video}
-                                >
+                            // data?.video ?
+                            //     <video
+                            //         className=' h-full w-full object-cover'
+                            //         preload="metadata"
+                            //         poster={data?.video}
+                            //         src={data?.video}
+                            //     >
 
-                                </video>
-                                :
-                                <Image
-                                    src={"/img/default-img.svg"}
-                                    width={100}
-                                    height={100}
-                                    className=" h-40 w-full object-cover "
-                                    alt="linkedin"
-                                    priority={true}
+                            //     </video>
+                            //     :
+                            <Image
+                                src={"/img/default-img.svg"}
+                                width={100}
+                                height={100}
+                                className=" h-40 w-full object-cover "
+                                alt="linkedin"
+                                priority={true}
 
-                                />
+                            />
 
                     }
                     { }

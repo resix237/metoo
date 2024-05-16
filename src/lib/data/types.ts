@@ -9,4 +9,5 @@ export type ProjectType={
     label:string;
     description:string;
     url?:string;
+    image?:any
 }

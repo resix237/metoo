@@ -86,3 +86,29 @@ body {
   }
 }
 
+.bg_abyster{
+  background-image: url("../../public/img/projects/Abyster.png");
+}
+.bg_sema{
+  background-image: url("../../public/img/projects/sema.png");
+}
+.bg_erp{
+  background-image: url("../../public/img/projects/erp-labo.png");
+}
+.bg_bacloo{
+  background-image: url("../../public/img/projects/bacloo.png");
+}
+
+.bg_abyster h1::before{
+    content: attr(data-formatted-number);
+}
+
+.bg_sema h1::before{
+  content: attr(data-formatted-number);
+}
+.bg_erp h1::before{
+  content: attr(data-formatted-number);
+}
+.bg_bacloo h1::before{
+  content: attr(data-formatted-number);
+}

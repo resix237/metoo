@@ -12,6 +12,7 @@ import Carrousel from "@/components/ui/Carrousel";
 import Skills from "@/components/ui/Skills";
 import Link from "next/link";
 import { scrapeLinkedInProfileAction } from "@/lib/actions";
+import { projects } from "@/lib/data"
 // import { ResponseScrapping } from "@/lib/types";
 
 
@@ -19,6 +20,7 @@ export default function Home() {
   const [ isPending, startTransition ] = useTransition();
   const [ dataArticle, setDataArticle ] = useState()
   const comp = useRef(null)
+
   useLayoutEffect(() => {
     gsap.registerPlugin(scrollTrigger)
     let ctx = gsap.context(() => {
@@ -225,9 +227,14 @@ export default function Home() {
 
         <span className=" text-xl font-light tracking-wider "><span className=" font-bold text-2xl">{`<`}</span> Recent_works <span className=" font-bold text-2xl">{`/>`}</span></span>
         <div className=" flex flex-col py-10 gap-10">
-          <CardProject position={0} />
-          <CardProject position={1} />
-          <CardProject position={0} />
+          {
+            projects.map((item, index) => (
+              <CardProject data={item} position={index} />
+
+            ))
+          }
+          {/* <CardProject position={1} />
+          <CardProject position={0} /> */}
         </div>
         <Image
           src={'/img/grid.svg'}
