@@ -10,14 +10,22 @@ interface cardProjectProps {
 }
 function CardProject(prop: cardProjectProps) {
     const [isHover, setIshover] = useState<boolean>(false);
+    useEffect(() => {
 
-    function formatNumber(num: number) {
-        return num < 10 ? '0' + num : String(num);
-    }
-    const numberElement = document.getElementById(prop.data.image);
-    const formattedNumber = formatNumber(prop.position + 1);
+        // Exécutez ce code uniquement côté client
+        function formatNumber(num: number) {
+            return num < 10 ? '0' + num : String(num);
+        }
+        if (typeof document !== 'undefined') {
 
-    numberElement?.setAttribute('data-formatted-number', formattedNumber);
+            const numberElement = document.getElementById(prop.data.image);
+            const formattedNumber = formatNumber(prop.position + 1);
+
+            if (numberElement) {
+                numberElement.setAttribute('data-formatted-number', formattedNumber);
+            }
+        }
+    }, [])
     return (
         <div className={` w-full lg:w-1/2 h-80 border-2 border-secondary relative ${prop.position % 2 === 0 ? " lg:ml-20 place-self-center " : " lg:mr-20 place-self-center"} ${prop.data.image} bg-cover bg-center   `}>
             <div
