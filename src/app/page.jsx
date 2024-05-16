@@ -229,7 +229,7 @@ export default function Home() {
         <div className=" flex flex-col py-10 gap-10">
           {
             projects.map((item, index) => (
-              <CardProject data={item} position={index} />
+              <CardProject key={index} data={item} position={index} />
 
             ))
           }
