@@ -1,3 +1,4 @@
+"use client"
 import { ProjectType } from '@/lib/data';
 
 import React, { useEffect, useState } from 'react'
