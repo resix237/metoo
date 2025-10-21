@@ -1,9 +1,14 @@
 import React from 'react'
+import Experience from '@/components/ui/Experience'
 
-function Page() {
+function ExperiencePage() {
     return (
-        <div className=' text-white'>Experience</div>
+        <div className="min-h-screen">
+            <div className=" ">
+                <Experience />
+            </div>
+        </div>
     )
 }
 
-export default Page;
+export default ExperiencePage;
