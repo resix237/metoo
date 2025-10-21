@@ -241,7 +241,7 @@ const Experience: React.FC = () => {
             Télécharger mon CV complet
           </h3>
           <p className="text-text/70 text-sm mb-6 max-w-md mx-auto">
-            Retrouvez l'ensemble de mon parcours professionnel, mes compétences et mes réalisations dans un document PDF détaillé.
+            Retrouvez l`&apos;`ensemble de mon parcours professionnel, mes compétences et mes réalisations dans un document PDF détaillé.
           </p>
          <div className="flex justify-center">
          <a

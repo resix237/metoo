@@ -30,16 +30,17 @@ export default function RootLayout({
       <link rel="preconnect" href="https://fonts.gstatic.com"  />
       <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
 
-      <body className={inter.className}>
+
+      <body >
  
         <Navbar />
 
-        {/* <div className="flex lg:hidden absolute top-0 left-0 w-full justify-between  py-14 place-items-center">
+        <div className="flex lg:hidden absolute top-0 left-0 w-full justify-between  py-14 place-items-center">
 
 
           <ButtonMenu />
 
-        </div> */}
+        </div>
         {children}
 
         <Footer />
