@@ -33,6 +33,7 @@
     "node-html-parser": "^7.0.1",
     "prisma": "^6.10.1",
     "react": "^18",
+    "sharp": "^0.33.0",
     "react-dom": "^18",
     "sass": "^1.72.0",
     "swiper": "^11.1.0",
