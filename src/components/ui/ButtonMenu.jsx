@@ -8,8 +8,8 @@ import Link from 'next/link';
 import TransitionLink from '../TransitionLink';
 
 function ButtonMenu() {
-    const [ open, setOpen ] = useState(false);
-    const [ hoverItem, setHoverItem ] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [hoverItem, setHoverItem] = useState(0);
     let t1 = useRef()
     const comp1 = useRef()
     const handleMenuOpen = () => {
@@ -36,7 +36,7 @@ function ButtonMenu() {
 
     useEffect(() => {
         open ? t1.current.play() : t1.current.reverse()
-    }, [ open ])
+    }, [open])
 
 
     return (
@@ -76,7 +76,20 @@ function ButtonMenu() {
                             <h1
                                 className={`menu opacity-0  translate-y-10 cursor-pointer  transition-all ${hoverItem === 0 || hoverItem === 1 ? "" : "text-white/50  "}`}>About</h1>
                         </TransitionLink>
-                        <TransitionLink href="/work"
+                        <TransitionLink href="/articles"
+
+                            onMouseEnter={() => {
+                                setHoverItem(4)
+                            }}
+                            onMouseLeave={() => {
+                                setHoverItem(0)
+                            }}
+                            className=' h-10 overflow-hidden'>
+                            <h1
+
+                                className={`menu opacity-0  translate-y-10 cursor-pointer  transition-all ${hoverItem === 0 || hoverItem === 4 ? "" : "text-white/50  "}`}>Articles</h1>
+                        </TransitionLink>
+                        <TransitionLink href="/projects"
                             onMouseEnter={() => {
                                 setHoverItem(2)
                             }}
@@ -86,7 +99,7 @@ function ButtonMenu() {
                             className=' h-10 overflow-hidden'>
                             <h1
 
-                                className={`menu opacity-0  translate-y-10 cursor-pointer   transition-all ${hoverItem === 0 || hoverItem === 2 ? "" : "text-white/50  "}`}>Work</h1>
+                                className={`menu opacity-0  translate-y-10 cursor-pointer   transition-all ${hoverItem === 0 || hoverItem === 2 ? "" : "text-white/50  "}`}>Projects</h1>
                         </TransitionLink>
                         <TransitionLink href="/experience"
                             onMouseEnter={() => {
@@ -100,20 +113,8 @@ function ButtonMenu() {
 
                                 className={`menu opacity-0  translate-y-10 cursor-pointer  transition-all ${hoverItem === 0 || hoverItem === 3 ? "" : "text-white/50  "}`}>Experience</h1>
                         </TransitionLink>
-                        <TransitionLink href="/blog"
 
-                            onMouseEnter={() => {
-                                setHoverItem(4)
-                            }}
-                            onMouseLeave={() => {
-                                setHoverItem(0)
-                            }}
-                            className=' h-10 overflow-hidden'>
-                            <h1
-
-                                className={`menu opacity-0  translate-y-10 cursor-pointer  transition-all ${hoverItem === 0 || hoverItem === 4 ? "" : "text-white/50  "}`}>Blog</h1>
-                        </TransitionLink>
-                        <TransitionLink href="/contact"
+                        {/* <TransitionLink href="/contact"
                             onMouseEnter={() => {
                                 setHoverItem(5)
                             }}
@@ -124,7 +125,7 @@ function ButtonMenu() {
                             <h1
 
                                 className={`menu opacity-0  translate-y-10 cursor-pointer  transition-all ${hoverItem === 0 || hoverItem === 5 ? "" : "text-white/50  ease-in-out duration-150 "}`}>Contact</h1>
-                        </TransitionLink>
+                        </TransitionLink> */}
                     </div>
 
                     <div className='absolute bottom-10 left-0 h-16 w-full lg:pl-0 lg:pr-10 px-10 pb-10 overflow-hidden  '>

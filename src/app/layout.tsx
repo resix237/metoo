@@ -8,9 +8,6 @@ import { AnimatePresence } from 'framer-motion';
 import ButtonMenu from "@/components/ui/ButtonMenu";
 import Navbar from "@/components/ui/Navbar";
 
-const inter = Inter({ subsets: [ "latin" ] });
-const ratio = 0.1;
-
 
 
 export default function RootLayout({

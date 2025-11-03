@@ -150,17 +150,33 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index }) =>
     <div className={`relative pl-8 pb-12 border-l-2 ${colors.border} last:pb-0`}>
       {/* Timeline dot */}
       <div className={`absolute w-4 h-4 ${colors.dot} rounded-full -left-2 top-0 shadow-lg ${colors.glow} animate-pulse`}></div>
-      
+    
       {/* Company header */}
       <div className="mb-6">
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-2">
-          <div>
-            <h3 className={`text-2xl font-bold ${colors.text} mb-1 tracking-tight`}>
-              {experience.position}
-            </h3>
-            <p className="text-gray-300 font-semibold text-lg">
-              {experience.company}
-            </p>
+          <div className="flex items-start gap-4">
+            {/* Company Logo */}
+            {experience.logo && (
+              <div className="flex-shrink-0">
+                <Image
+                  src={experience.logo}
+                  alt={`${experience.company} logo`}
+                  width={60}
+                  height={60}
+                  className="rounded-lg border border-accent/30 bg-white/5 p-2 backdrop-blur-sm"
+                />
+              </div>
+            )}
+            
+            {/* Company Info */}
+            <div>
+              <h3 className={`text-2xl font-bold ${colors.text} mb-1 tracking-tight`}>
+                {experience.position}
+              </h3>
+              <p className="text-gray-300 font-semibold text-lg">
+                {experience.company}
+              </p>
+            </div>
           </div>
           <div className="flex items-center mt-2 lg:mt-0">
             <svg className="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -9,6 +9,8 @@ export interface Project {
   missions?: string;
   technologies: Technology[];
   link?: string;
+status?: string;
+period?: string;
 }
 
 export interface Experience {
@@ -26,14 +28,55 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    id: "Credit foncier du Cameroun",
+    company: "Credit foncier du Cameroun",
+    position: "Ingénieur Logiciel",
+    period: "06/2025 - Aujourd'hui",
+    startDate: "06/2025",
+    endDate: "Aujourd'hui",
+    color: "violet",
+    logo: "/img/CFC.png",
+    projects: [
+      {
+        name: "Convertisseur SYSTAC 2",
+       
+        description: "Développement du convertisseur SYSTAC 2 pour le nouveau système de compensation de la BEAC ,Conception et développement d'un système de conversion pour migrer vers le nouveau système de compensation bancaire de la Banque des États de l'Afrique Centrale (BEAC).",
+        technologies: [
+          { name: "Python", color: "bg-orange-500/20 text-orange-300" },
+          { name: "Django rest framework", color: "bg-green-500/20 text-green-300" },
+          { name: "PostgreSQL", color: "bg-blue-500/20 text-blue-300" },
+          { name: "REST API", color: "bg-purple-500/20 text-purple-300" },
+    
+        ],
+        status: "En cours",
+        period: "04/2024 - Aujourd'hui"
+      },
+      {
+     
+        name: "Architecture Big Data CFC",
+        description: "Mise en place de l'architecture Big Data du Crédit Foncier du Cameroun, Conception et implémentation d'une architecture Big Data moderne pour optimiser le traitement et l'analyse des données bancaires du CFC.",
+        technologies: [
+          { name: "Apache Spark", color: "bg-orange-500/20 text-orange-300" },
+          { name: "Hadoop", color: "bg-yellow-500/20 text-yellow-300" },
+          { name: "Kafka", color: "bg-red-500/20 text-red-300" },
+          { name: "Elasticsearch", color: "bg-blue-500/20 text-blue-300" },
+          { name: "Python", color: "bg-green-500/20 text-green-300" },
+          { name: "Scala", color: "bg-purple-500/20 text-purple-300" }
+        ],
+        status: "En cours",
+        period: "04/2024 - Aujourd'hui"
+      }
+    ]
+  },
+  {
     id: "kayeros",
     company: "Kayeros Analytics",
     position: "Ingénieur Logiciel",
-    period: "04/2024 - Aujourd'hui",
+    period: "04/2024 - 06/2025",
     startDate: "04/2024",
-    endDate: "Aujourd'hui",
+    endDate: "06/2025",
     color: "violet",
-    logo: "/img/logos/kayeros.png",
+    logo: "/img/kaeyros.jpeg",
     projects: [
       {
         name: "PAMJ - Gestion de Conférence Scientifique",
@@ -85,7 +128,7 @@ export const experiences: Experience[] = [
     startDate: "04/2023",
     endDate: "04/2024",
     color: "blue",
-    logo: "/img/logos/abyster.png",
+    logo: "/img/abyster.png",
     projects: [
       {
         name: "eMpata - Plateforme FinTech",
@@ -134,7 +177,7 @@ export const experiences: Experience[] = [
     startDate: "08/2021",
     endDate: "04/2023",
     color: "green",
-    logo: "/img/logos/ofty.png",
+    logo: "/img/ofty.png",
     projects: [
       {
         name: "Andaal - Application Mobile",
@@ -180,7 +223,7 @@ export const experiences: Experience[] = [
     startDate: "06/2020",
     endDate: "06/2021",
     color: "gray",
-    logo: "/img/logos/default.png",
+    logo: "/img/autres.jpeg",
     projects: [
       {
         name: "HDK Website",

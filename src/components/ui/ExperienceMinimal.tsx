@@ -50,7 +50,7 @@ const ExperienceMinimal: React.FC = () => {
         <span className="text-xl font-light tracking-wider mb-4 block">
           <span className="font-bold text-2xl text-violet-400">{`<`}</span> 
           <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-            Experience
+            Experience sdsdcds
           </span> 
           <span className="font-bold text-2xl text-blue-400">{`/>`}</span>
         </span>
@@ -70,18 +70,9 @@ const ExperienceMinimal: React.FC = () => {
             >
               {/* Company Logo */}
               <div className="flex-shrink-0 mr-6">
-                <div className="w-16 h-16 rounded-full bg-gray-800/50 border border-gray-700 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
-                  {experience.logo ? (
-                    <Image
-                      src={experience.logo}
-                      width={40}
-                      height={40}
-                      alt={`${experience.company} logo`}
-                      className="object-contain"
-                    />
-                  ) : (
-                    <div className={`w-8 h-8 rounded-full ${colors.dot}`}></div>
-                  )}
+                <div className="w-16 h-16 rounded-full bg-white border border-gray-700 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
+        
+                 
                 </div>
               </div>
 
