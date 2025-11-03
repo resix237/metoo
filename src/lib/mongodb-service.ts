@@ -1,22 +1,38 @@
 import { MongoClient, Db, Collection } from 'mongodb'
 
 class MongoDBService {
-  private client: MongoClient
+  private client: MongoClient | null = null
   private db: Db | null = null
 
-  constructor() {
-    this.client = new MongoClient(process.env.DATABASE_URL!)
+  private getClient(): MongoClient {
+    if (!this.client) {
+      // Skip database connection during build phase
+      if (process.env.NEXT_PHASE === 'phase-production-build') {
+        throw new Error('Database not available during build phase')
+      }
+      
+      const connectionString = process.env.DATABASE_URL
+      if (!connectionString) {
+        throw new Error('DATABASE_URL environment variable is not set')
+      }
+      this.client = new MongoClient(connectionString)
+    }
+    return this.client
   }
 
   async connect(): Promise<void> {
     if (!this.db) {
-      await this.client.connect()
-      this.db = this.client.db('metoo_blog')
+      const client = this.getClient()
+      await client.connect()
+      this.db = client.db('metoo_blog')
     }
   }
 
   async disconnect(): Promise<void> {
-    await this.client.close()
+    if (this.client) {
+      await this.client.close()
+      this.client = null
+    }
     this.db = null
   }
 

@@ -8,6 +8,14 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Return empty response during build phase
+    if (process.env.NEXT_PHASE === 'phase-production-build') {
+      return NextResponse.json(
+        { error: 'Article non trouvé' },
+        { status: 404 }
+      )
+    }
+
     const article = await prisma.article.findUnique({
       where: {
         id: params.id

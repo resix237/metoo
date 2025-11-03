@@ -11,6 +11,9 @@ RUN npm install
 # Copy source code
 COPY . .
 
+# Set build-time environment variable to prevent database connections during build
+ENV NEXT_PHASE=phase-production-build
+
 # Generate Prisma client
 RUN npx prisma generate
 

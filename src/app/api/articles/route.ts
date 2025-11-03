@@ -6,6 +6,15 @@ import { isAuthenticated } from '@/lib/auth'
 // GET /api/articles - Get all articles (public)
 export async function GET(request: NextRequest) {
   try {
+    // Return empty response during build phase
+    if (process.env.NEXT_PHASE === 'phase-production-build') {
+      return NextResponse.json({
+        articles: [],
+        total: 0,
+        hasMore: false
+      })
+    }
+
     const { searchParams } = new URL(request.url)
     const limit = parseInt(searchParams.get('limit') || '10')
     const offset = parseInt(searchParams.get('offset') || '0')
