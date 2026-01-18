@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["media.licdn.com"],
+    domains: ["media.licdn.com", "docs.google.com"],
   },
   // Enable standalone output for Docker deployment
   output: 'standalone',

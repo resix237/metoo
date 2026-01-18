@@ -11,6 +11,7 @@ import { projects, ProjectType } from "@/lib/data"
 import { ResponseScrapping } from "@/lib/types";
 import ExperienceAndArticles from "@/components/ui/ExperienceAndArticles";
 import Drawer from "@/components/ui/Drawer";
+import GallerySection from "@/components/ui/GallerySection";
 import { ExternalLink } from "lucide-react";
 // import { ResponseScrapping } from "@/lib/types";
 
@@ -256,6 +257,11 @@ export default function Home() {
           />
         </div>
       </div>
+      <div className="h-[1px] bg-accent " />
+
+      {/* section Gallery */}
+      <GallerySection />
+
       <div className=" relative xl:px-64 px-5 lg:px-32 pt-10 text-white flex flex-col ">
         <span className=" text-xl font-light tracking-wider "><span className=" font-bold text-2xl">{`<`}</span> My_skills <span className=" font-bold text-2xl">{`/>`}</span></span>
 
@@ -265,7 +271,7 @@ export default function Home() {
         </div>
 
       </div>
-    </Fragment>
+    </Fragment >
 
   );
 }
