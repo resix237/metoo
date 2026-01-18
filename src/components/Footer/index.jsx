@@ -67,12 +67,12 @@ function Footer() {
                 <div className="">©Copyright {currentDate.getFullYear()} - Marc Fouda</div>
             </div>
             <div className='flex md:absolute right-5 top-0 self-end items-center gap-2'>
-                <span className='text-sm'>
+                <span className=' lg:text-lg text-sm'>
                     Number of visitors
                 </span>
                 <div align="center">
                     <a href='https://www.counter12.com'>
-                        <img className=' h-3' src='https://www.counter12.com/img-d9cZ5dZC3ybzZAWA-79.gif' border='0' alt='free web counter' />
+                        <img className=' lg:h-4 h-3' src='https://www.counter12.com/img-d9cZ5dZC3ybzZAWA-79.gif' border='0' alt='free web counter' />
                     </a>
                     <script type='text/javascript' src='https://www.counter12.com/ad.js?id=d9cZ5dZC3ybzZAWA'>
                     </script>
