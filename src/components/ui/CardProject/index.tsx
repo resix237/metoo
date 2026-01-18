@@ -6,6 +6,7 @@ import "./style.css"
 interface cardProjectProps {
     data: ProjectType
     position: number;
+    onClick?: () => void;
 
 }
 function CardProject(prop: cardProjectProps) {
@@ -27,7 +28,9 @@ function CardProject(prop: cardProjectProps) {
         }
     }, [prop.data.image, prop.position])
     return (
-        <div className={` w-full lg:w-1/2 h-80 border-2 border-secondary relative ${prop.position % 2 === 0 ? " lg:ml-20 place-self-center " : " lg:mr-20 place-self-center"} ${prop.data.image} bg-cover bg-center   `}>
+        <div
+            onClick={prop.onClick}
+            className={` w-full lg:w-1/2 h-80 border-2 border-secondary relative cursor-pointer ${prop.position % 2 === 0 ? " lg:ml-20 place-self-center " : " lg:mr-20 place-self-center"} ${prop.data.image} bg-cover bg-center   `}>
             <div
                 onMouseEnter={() => setIshover(true)}
                 onMouseLeave={() => setIshover(false)}

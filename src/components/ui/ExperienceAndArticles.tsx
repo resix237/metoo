@@ -10,25 +10,25 @@ const colorVariants = {
   violet: {
     border: 'border-accent/50',
     dot: 'bg-primary',
-    text: 'text-primary',
+    text: 'text-white',
     glow: 'shadow-primary/20'
   },
   blue: {
     border: 'border-accent/40',
     dot: 'bg-primary/80',
-    text: 'text-primary/90',
+    text: 'text-white',
     glow: 'shadow-primary/15'
   },
   green: {
     border: 'border-accent/30',
     dot: 'bg-primary/70',
-    text: 'text-primary/80',
+    text: 'text-white',
     glow: 'shadow-primary/10'
   },
   gray: {
     border: 'border-accent/20',
     dot: 'bg-primary/60',
-    text: 'text-primary/70',
+    text: 'text-white',
     glow: 'shadow-primary/5'
   }
 }
@@ -72,22 +72,22 @@ const ExperienceAndArticles: React.FC = () => {
   }, [])
 
   // Use blog articles if available, otherwise LinkedIn articles, otherwise fallback
-  const displayArticles = blogArticles.length > 0 
+  const displayArticles = blogArticles.length > 0
     ? blogArticles.map(article => ({
-        id: article.id,
-        title: article.title,
-        excerpt: article.excerpt,
-        date: article.date,
-        readTime: article.readTime,
-        url: `/articles/${article.id}`,
-        content: article.content
-      }))
-    : linkedInArticles.length > 0 
-    ? linkedInArticles 
-    : fallbackArticles
+      id: article.id,
+      title: article.title,
+      excerpt: article.excerpt,
+      date: article.date,
+      readTime: article.readTime,
+      url: `/articles/${article.id}`,
+      content: article.content
+    }))
+    : linkedInArticles.length > 0
+      ? linkedInArticles
+      : fallbackArticles
 
   const loading = blogLoading || linkedInLoading
-  
+
   return (
     <div className="relative xl:px-64 px-5 lg:px-32 py-16 text-white">
       {/* Background decorations */}
@@ -99,19 +99,19 @@ const ExperienceAndArticles: React.FC = () => {
         alt="decoration"
         priority={true}
       />
-      
+
       {/* Main Grid Container */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-        
+
         {/* Left Column - Experience */}
         <div className="space-y-8">
           {/* Experience Header */}
           <div>
             <span className="text-xl font-light tracking-wider mb-4 block">
-              <span className="font-bold text-2xl text-white">{`<`}</span> 
+              <span className="font-bold text-2xl text-white">{`<`}</span>
               <span className="">
                 Experience
-              </span> 
+              </span>
               <span className="font-bold text-2xl text-white">{`/>`}</span>
             </span>
             <div className="w-16 h-1 bg-white rounded-full mb-2"></div>
@@ -122,15 +122,15 @@ const ExperienceAndArticles: React.FC = () => {
           <div className="space-y-4">
             {experiences.map((experience, index) => {
               const colors = colorVariants[experience.color as keyof typeof colorVariants]
-              
+
               return (
-                <div 
-                  key={experience.id} 
+                <div
+                  key={experience.id}
                   className={`group relative flex items-center p-4 rounded-lg border ${colors.border} bg-secondary/30 backdrop-blur-sm hover:bg-secondary/50 transition-all duration-300`}
                 >
                   {/* Timeline dot */}
                   <div className={`w-3 h-3 ${colors.dot} rounded-full mr-4 flex-shrink-0`}></div>
-                  
+
                   {/* Company Logo - Smaller */}
                   <div className="flex-shrink-0 mr-4">
                     <div className="w-10 h-10 rounded-full bg-white border border-accent flex items-center justify-center overflow-hidden">
@@ -171,18 +171,18 @@ const ExperienceAndArticles: React.FC = () => {
 
           {/* Experience CTA */}
           <div className="text-center  flex items-center place-items-center gap-5  ">
-       
-           <Link 
+
+            <Link
               href="/experience"
               className="uppercase relative px-4 py-2 border-[1px] w-full  max-w-52 border-white text-sm rounded-3xl flex justify-center place-items-center gap-1.5 before:absolute before:left-0 before:top-1/2 hover:before:top-0 before:h-0 before:z-1 before:rounded-sm hover:before:rounded-full before:transition-all before:duration-500 before:origin-left before:w-0 before:bg-accent/60 hover:before:w-full hover:before:h-full hover:before:origin-right text-white hover:text-white transition-colors duration-300"
-              >
+            >
               <span>Voir le détail</span>
               <svg className="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </Link>
-    
-            
+
+
             {/* Download CV Button */}
             <div className='w-full  max-w-52'>
               <a
@@ -204,10 +204,10 @@ const ExperienceAndArticles: React.FC = () => {
           {/* Articles Header */}
           <div>
             <span className="text-xl font-light tracking-wider mb-4 block">
-              <span className="font-bold text-2xl text-primary">{`<`}</span> 
+              <span className="font-bold text-2xl text-primary">{`<`}</span>
               <span className="bg-gradient-to-r from-primary to-text bg-clip-text text-transparent">
                 Recent_Articles
-              </span> 
+              </span>
               <span className="font-bold text-2xl text-primary">{`/>`}</span>
             </span>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-accent rounded-full mb-2"></div>
@@ -237,20 +237,18 @@ const ExperienceAndArticles: React.FC = () => {
 
           {/* LinkedIn API Status */}
           {isAuthenticated && source && (
-            <div className={`mb-6 p-4 rounded-lg border ${
-              source === 'linkedin_api' 
-                ? 'border-green-500/30 bg-green-500/10' 
-                : 'border-red-500/30 bg-red-500/10'
-            }`}>
+            <div className={`mb-6 p-4 rounded-lg border ${source === 'linkedin_api'
+              ? 'border-green-500/30 bg-green-500/10'
+              : 'border-red-500/30 bg-red-500/10'
+              }`}>
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className={`text-sm font-semibold mb-1 ${
-                    source === 'linkedin_api' ? 'text-green-400' : 'text-red-400'
-                  }`}>
+                  <h4 className={`text-sm font-semibold mb-1 ${source === 'linkedin_api' ? 'text-green-400' : 'text-red-400'
+                    }`}>
                     {source === 'linkedin_api' ? '✅ API LinkedIn connectée' : '❌ Erreur API LinkedIn'}
                   </h4>
                   <p className="text-xs text-text/70">
-                    {source === 'linkedin_api' 
+                    {source === 'linkedin_api'
                       ? `Articles récupérés via l'API LinkedIn officielle${lastUpdated ? ` • ${lastUpdated}` : ''}`
                       : 'Impossible de récupérer les articles via l\'API LinkedIn'}
                   </p>
@@ -277,7 +275,7 @@ const ExperienceAndArticles: React.FC = () => {
               </div>
             </div>
           )}
-          
+
           {/* Loading State */}
           {loading && (
             <div className="flex items-center justify-center py-8">
@@ -285,7 +283,7 @@ const ExperienceAndArticles: React.FC = () => {
               <span className="ml-3 text-text/70">Récupération des articles LinkedIn...</span>
             </div>
           )}
-          
+
           {/* Error State */}
           {error && (
             <div className="mb-6 p-4 rounded-lg border border-red-500/30 bg-red-500/10">
@@ -303,11 +301,11 @@ const ExperienceAndArticles: React.FC = () => {
               </div>
             </div>
           )}
-          
+
           {/* Articles List */}
           <div className="space-y-4">
             {displayArticles.map((article, index) => (
-              <div 
+              <div
                 key={article.id}
                 className="group relative p-4 rounded-lg border border-accent/50 bg-secondary/30 backdrop-blur-sm hover:bg-secondary/50 transition-all duration-300 hover:border-accent"
               >
@@ -320,7 +318,7 @@ const ExperienceAndArticles: React.FC = () => {
                       </svg>
                     </div>
                   </div>
-                  
+
                   {/* Article Content */}
                   <div className="flex-grow min-w-0">
                     <h3 className="text-sm font-semibold text-white group-hover:text-primary transition-colors duration-300 line-clamp-2">
@@ -336,9 +334,9 @@ const ExperienceAndArticles: React.FC = () => {
                       {article.url !== "#" && (
                         <>
                           <span className="mx-2">•</span>
-                          <a 
-                            href={article.url} 
-                            target="_blank" 
+                          <a
+                            href={article.url}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:text-accent transition-colors"
                           >
@@ -346,10 +344,10 @@ const ExperienceAndArticles: React.FC = () => {
                           </a>
                         </>
                       )}
-                 
+
                     </div>
                   </div>
-                  
+
                   {/* Read more indicator */}
                   <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <svg className="w-4 h-4 text-text/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -375,10 +373,10 @@ const ExperienceAndArticles: React.FC = () => {
                 {loading ? 'Actualisation...' : 'Actualiser'}
               </button>
             </div> */}
-            <Link 
+            <Link
               href="/articles"
               className="uppercase relative px-4 py-2 border-[1px] w-full  max-w-52 border-white text-sm rounded-3xl flex justify-center place-items-center gap-1.5 before:absolute before:left-0 before:top-1/2 hover:before:top-0 before:h-0 before:z-1 before:rounded-sm hover:before:rounded-full before:transition-all before:duration-500 before:origin-left before:w-0 before:bg-accent/60 hover:before:w-full hover:before:h-full hover:before:origin-right text-white hover:text-white transition-colors duration-300"
-              >
+            >
               <span>Voir le détail</span>
               <svg className="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

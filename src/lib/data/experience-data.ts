@@ -9,8 +9,8 @@ export interface Project {
   missions?: string;
   technologies: Technology[];
   link?: string;
-status?: string;
-period?: string;
+  status?: string;
+  period?: string;
 }
 
 export interface Experience {
@@ -39,20 +39,20 @@ export const experiences: Experience[] = [
     projects: [
       {
         name: "Convertisseur SYSTAC 2",
-       
+
         description: "Développement du convertisseur SYSTAC 2 pour le nouveau système de compensation de la BEAC ,Conception et développement d'un système de conversion pour migrer vers le nouveau système de compensation bancaire de la Banque des États de l'Afrique Centrale (BEAC).",
         technologies: [
           { name: "Python", color: "bg-orange-500/20 text-orange-300" },
           { name: "Django rest framework", color: "bg-green-500/20 text-green-300" },
           { name: "PostgreSQL", color: "bg-blue-500/20 text-blue-300" },
           { name: "REST API", color: "bg-purple-500/20 text-purple-300" },
-    
+
         ],
         status: "En cours",
         period: "04/2024 - Aujourd'hui"
       },
       {
-     
+
         name: "Architecture Big Data CFC",
         description: "Mise en place de l'architecture Big Data du Crédit Foncier du Cameroun, Conception et implémentation d'une architecture Big Data moderne pour optimiser le traitement et l'analyse des données bancaires du CFC.",
         technologies: [

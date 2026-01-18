@@ -7,16 +7,25 @@ import Carrousel from "@/components/ui/Carrousel";
 import Skills from "@/components/ui/Skills";
 import Link from "next/link";
 import { scrapeLinkedInProfileAction } from "@/lib/actions";
-import { projects } from "@/lib/data"
+import { projects, ProjectType } from "@/lib/data"
 import { ResponseScrapping } from "@/lib/types";
 import ExperienceAndArticles from "@/components/ui/ExperienceAndArticles";
+import Drawer from "@/components/ui/Drawer";
+import { ExternalLink } from "lucide-react";
 // import { ResponseScrapping } from "@/lib/types";
 
 
 export default function Home() {
-  const [ isPending, startTransition ] = useTransition();
-  const [ dataArticle, setDataArticle ] = useState<ResponseScrapping[]>([])
+  const [isPending, startTransition] = useTransition();
+  const [dataArticle, setDataArticle] = useState<ResponseScrapping[]>([])
   const comp = useRef(null)
+  const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const handleProjectClick = (project: ProjectType) => {
+    setSelectedProject(project);
+    setIsDrawerOpen(true);
+  };
 
 
 
@@ -26,10 +35,10 @@ export default function Home() {
 
 
       <div ref={comp} className=" xl:px-64 px-5 lg:px-32 transition-all ease-in-out duration-100 relative h-screen">
-    
+
         <div>
           <h1 className=" py-20 font-Montserrat text-white text-xl font-light uppercase   ">
-         
+
           </h1>
           <div className=" grid grid-cols-1 lg:grid-cols-2 pt-20" >
             <div className=" md:text-6xl text-2xl text-white font-Montserrat flex flex-col  gap-3 relative " >
@@ -53,9 +62,9 @@ export default function Home() {
               <span className="animate-text text-sm md:text-xl font-bold tracking-wider flex place-items-center "><span className=" font-bold text-lg md:text-2xl">{`<`}</span> Sculteur_de_pixels <span className=" font-bold text-lg md:text-2xl">{`/>`}</span></span>
             </div>
             <div className=" relative pt-10 justify-center place-items-center ">
-          
 
-             
+
+
 
 
 
@@ -126,7 +135,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       {/* section expérience */}
       <ExperienceAndArticles />
 
@@ -158,12 +167,48 @@ export default function Home() {
         <div className=" flex flex-col py-10 gap-10">
           {
             projects.map((item, index) => (
-              <CardProject key={index} data={item} position={index} />
+              <CardProject key={index} data={item} position={index} onClick={() => handleProjectClick(item)} />
 
             ))
           }
-          {/* <CardProject position={1} />
-          <CardProject position={0} /> */}
+          <Drawer
+            isOpen={isDrawerOpen}
+            onClose={() => setIsDrawerOpen(false)}
+            title={selectedProject?.name}
+          >
+            {selectedProject && (
+              <div className="flex flex-col gap-6 font-Hind">
+                {/* Featured Image Placeholder (since we only have bg color classes) */}
+                <div className={`w-full h-64 rounded-xl border border-white/10 ${selectedProject.image} bg-cover bg-center shadow-lg`} />
+
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-secondary text-sm font-bold uppercase tracking-widest mb-1">Company / Type</h3>
+                    <p className="text-white text-lg">{selectedProject.label}</p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-secondary text-sm font-bold uppercase tracking-widest mb-1">Overview</h3>
+                    <p className="text-white/80 leading-relaxed text-base">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  {selectedProject.url && (
+                    <div className="pt-4">
+                      <Link
+                        href={selectedProject.url}
+                        target="_blank"
+                        className="inline-flex items-center gap-2  text-black font-bold py-3 px-6 rounded-lg bg-white transition-colors duration-300"
+                      >
+                        Visit Website <ExternalLink size={18} />
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </Drawer>
         </div>
         <Image
           src={'/img/grid.svg'}
