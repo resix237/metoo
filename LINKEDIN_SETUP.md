@@ -20,11 +20,7 @@ Dans l'onglet "Products", demandez l'accès à :
 - **Share on LinkedIn** (gratuit)
 - **Marketing Developer Platform** (peut nécessiter une approbation)
 
-### 3. Configurer les URLs de redirection
 
-Dans l'onglet "Auth" :
-- Ajoutez `http://localhost:3000/api/auth/linkedin/callback` pour le développement
-- Ajoutez `https://votre-domaine.com/api/auth/linkedin/callback` pour la production
 
 ### 4. Récupérer les clés API
 
