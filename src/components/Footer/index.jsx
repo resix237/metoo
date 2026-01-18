@@ -19,15 +19,15 @@ function Footer() {
             annee = today.getFullYear();
 
             //Récupérer le mois : 
-            listeMois = [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ];
-            mois = listeMois[ today.getMonth() ]; //getMonth() donne l'index 1 comme on est en Février, ce qui donne la valeur "Février" depuis notre liste
+            listeMois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+            mois = listeMois[today.getMonth()]; //getMonth() donne l'index 1 comme on est en Février, ce qui donne la valeur "Février" depuis notre liste
 
             // Récupérer le numéro du jour du mois : 
             jourNUmero = today.getDate(); //donne 29
 
             // Récupérer le jour. Attention la semaine commence un dimanche en Javascript : 
-            listeJours = [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ];
-            jourNom = listeJours[ today.getDay() ]; // getDay() donne index 6, donc samedi
+            listeJours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+            jourNom = listeJours[today.getDay()]; // getDay() donne index 6, donc samedi
 
 
             //Afficher les heures, minutes et secondes toujours avec deux chiffres : 
@@ -66,19 +66,17 @@ function Footer() {
                 <div className="date hidden"></div>
                 <div className="">©Copyright {currentDate.getFullYear()} - Marc Fouda</div>
             </div>
-            <div className='flex md:absolute right-5 top-0 self-end'>
+            <div className='flex md:absolute right-5 top-0 self-end items-center gap-2'>
                 <span className='text-sm'>
                     Number of visitors
                 </span>
-                <Image
-                    src={'https://profile-counter.glitch.me/resix237pro/count.svg'}
-                    width={100}
-                    height={1}
-                    className=" h-4 mt-0.5 mx-1"
-                    alt="linkedin"
-                    priority={true}
-
-                />
+                <div align="center">
+                    <a href='https://www.counter12.com'>
+                        <img className=' h-3' src='https://www.counter12.com/img-d9cZ5dZC3ybzZAWA-79.gif' border='0' alt='free web counter' />
+                    </a>
+                    <script type='text/javascript' src='https://www.counter12.com/ad.js?id=d9cZ5dZC3ybzZAWA'>
+                    </script>
+                </div>
             </div>
         </div>
     )

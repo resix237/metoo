@@ -25,7 +25,7 @@ function CardProject(prop: cardProjectProps) {
                 numberElement.setAttribute('data-formatted-number', formattedNumber);
             }
         }
-    }, [])
+    }, [prop.data.image, prop.position])
     return (
         <div className={` w-full lg:w-1/2 h-80 border-2 border-secondary relative ${prop.position % 2 === 0 ? " lg:ml-20 place-self-center " : " lg:mr-20 place-self-center"} ${prop.data.image} bg-cover bg-center   `}>
             <div

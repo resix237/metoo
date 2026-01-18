@@ -10,7 +10,7 @@ class MongoDBService {
       if (process.env.NEXT_PHASE === 'phase-production-build') {
         throw new Error('Database not available during build phase')
       }
-      
+
       const connectionString = process.env.DATABASE_URL
       if (!connectionString) {
         throw new Error('DATABASE_URL environment variable is not set')
@@ -50,14 +50,18 @@ class MongoDBService {
     url?: string
     image?: string
     tags: string[]
+    published?: boolean
+    linkedinPostUrl?: string
   }) {
     const collection = await this.getCollection('articles')
-    
+
     const article = {
       ...articleData,
       likes: 0,
       comments: 0,
       shares: 0,
+      published: articleData.published ?? false,
+      linkedinPostUrl: articleData.linkedinPostUrl || null,
       date: new Date(),
       createdAt: new Date(),
       updatedAt: new Date()
@@ -70,24 +74,24 @@ class MongoDBService {
   async updateArticle(id: string, updateData: any) {
     const collection = await this.getCollection('articles')
     const { ObjectId } = require('mongodb')
-    
+
     const result = await collection.updateOne(
       { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updatedAt: new Date() 
-        } 
+      {
+        $set: {
+          ...updateData,
+          updatedAt: new Date()
+        }
       }
     )
-    
+
     return result.modifiedCount > 0
   }
 
   async deleteArticle(id: string) {
     const collection = await this.getCollection('articles')
     const { ObjectId } = require('mongodb')
-    
+
     const result = await collection.deleteOne({ _id: new ObjectId(id) })
     return result.deletedCount > 0
   }
@@ -95,7 +99,7 @@ class MongoDBService {
   // Admin operations
   async createAdmin(secretCode: string) {
     const collection = await this.getCollection('admins')
-    
+
     const admin = {
       secretCode,
       isActive: true,

@@ -16,6 +16,8 @@ interface Article {
   likes: number
   comments: number
   shares: number
+  published: boolean
+  linkedinPostUrl?: string
   createdAt: string
   updatedAt: string
 }
@@ -28,6 +30,8 @@ interface ArticleForm {
   url: string
   image: string
   tags: string[]
+  published: boolean
+  shareToLinkedin: boolean
 }
 
 export default function AdminPage() {
@@ -45,9 +49,12 @@ export default function AdminPage() {
     readTime: '5 min',
     url: '',
     image: '',
-    tags: []
+    tags: [],
+    published: false,
+    shareToLinkedin: false
   })
   const [tagInput, setTagInput] = useState('')
+  const [showPreview, setShowPreview] = useState(false)
 
   useEffect(() => {
     // Check if already authenticated
@@ -62,11 +69,15 @@ export default function AdminPage() {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch('/api/articles')
-      // If we can access articles, we might be authenticated
-      // We'll check this more thoroughly in the actual implementation
+      const response = await fetch('/api/auth/me')
+      if (response.ok) {
+        setIsAuthenticated(true)
+      } else {
+        setIsAuthenticated(false)
+      }
     } catch (error) {
       // Not authenticated
+      setIsAuthenticated(false)
     }
   }
 
@@ -179,11 +190,14 @@ export default function AdminPage() {
       readTime: '5 min',
       url: '',
       image: '',
-      tags: []
+      tags: [],
+      published: false,
+      shareToLinkedin: false
     })
     setTagInput('')
     setEditingArticle(null)
     setShowForm(false)
+    setShowPreview(false)
   }
 
   const startEdit = (article: Article) => {
@@ -194,7 +208,9 @@ export default function AdminPage() {
       readTime: article.readTime,
       url: article.url || '',
       image: article.image || '',
-      tags: article.tags
+      tags: article.tags,
+      published: article.published || false,
+      shareToLinkedin: false
     })
     setEditingArticle(article)
     setShowForm(true)
@@ -233,7 +249,7 @@ export default function AdminPage() {
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
         <div className="bg-gray-800 p-8 rounded-xl border border-gray-700 w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">Administration du Blog</h1>
-          
+
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label htmlFor="secretCode" className="block text-sm font-medium mb-2">
@@ -345,14 +361,30 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Contenu</label>
-                <textarea
-                  value={formData.content}
-                  onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                  rows={10}
-                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500"
-                  required
-                />
+                <div className="flex justify-between items-center mb-2">
+                  <label className="block text-sm font-medium">Contenu</label>
+                  <button
+                    type="button"
+                    onClick={() => setShowPreview(!showPreview)}
+                    className="text-sm text-violet-400 hover:text-violet-300"
+                  >
+                    {showPreview ? 'Éditer' : 'Prévisualiser'}
+                  </button>
+                </div>
+
+                {showPreview ? (
+                  <div className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg min-h-[250px] prose prose-invert max-w-none">
+                    <div className="whitespace-pre-wrap">{formData.content}</div>
+                  </div>
+                ) : (
+                  <textarea
+                    value={formData.content}
+                    onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                    rows={10}
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 font-mono"
+                    required
+                  />
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -428,6 +460,30 @@ export default function AdminPage() {
                 </div>
               </div>
 
+              <div className="flex gap-6 p-4 bg-gray-700/30 rounded-lg border border-gray-700">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.published}
+                    onChange={(e) => setFormData(prev => ({ ...prev, published: e.target.checked }))}
+                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-violet-600 focus:ring-violet-500"
+                  />
+                  <span>Publier l'article</span>
+                </label>
+
+                {formData.published && !editingArticle && (
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formData.shareToLinkedin}
+                      onChange={(e) => setFormData(prev => ({ ...prev, shareToLinkedin: e.target.checked }))}
+                      className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Publier sur LinkedIn (si nouveau)</span>
+                  </label>
+                )}
+              </div>
+
               <div className="flex gap-4">
                 <button
                   type="submit"
@@ -475,6 +531,14 @@ export default function AdminPage() {
                         <span>{formatDate(article.createdAt)}</span>
                         <span>{article.readTime}</span>
                         <span>{article.tags.length} tags</span>
+                        <span className={`px-2 py-0.5 rounded text-xs ${article.published ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                          {article.published ? 'Publié' : 'Brouillon'}
+                        </span>
+                        {article.linkedinPostUrl && (
+                          <a href={article.linkedinPostUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                            Voir sur LinkedIn
+                          </a>
+                        )}
                       </div>
                     </div>
                     <div className="flex gap-2 ml-4">

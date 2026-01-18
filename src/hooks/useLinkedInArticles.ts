@@ -18,6 +18,42 @@ export const useLinkedInArticles = (count: number = 10): UseLinkedInArticlesResu
   const [error, setError] = useState<string | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+  // Fetch articles from API
+  const fetchArticles = useCallback(async () => {
+    if (!linkedInAuth.isAuthenticated()) {
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch(`/api/linkedin/articles?count=${count}`)
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Erreur lors de la récupération des articles')
+      }
+
+      if (data.success) {
+        setArticles(data.articles)
+      } else {
+        throw new Error(data.message || 'Erreur inconnue')
+      }
+    } catch (err: any) {
+      console.error('Error fetching articles:', err)
+      setError(err.message)
+
+      // If authentication error, reset auth state
+      if (err.message.includes('authenticate') || err.message.includes('expired')) {
+        setIsAuthenticated(false)
+        linkedInAuth.logout()
+      }
+    } finally {
+      setLoading(false)
+    }
+  }, [count])
+
   // Check authentication status
   useEffect(() => {
     setIsAuthenticated(linkedInAuth.isAuthenticated())
@@ -57,43 +93,7 @@ export const useLinkedInArticles = (count: number = 10): UseLinkedInArticlesResu
     }
 
     handleCallback()
-  }, [])
-
-  // Fetch articles from API
-  const fetchArticles = useCallback(async () => {
-    if (!linkedInAuth.isAuthenticated()) {
-      return
-    }
-
-    setLoading(true)
-    setError(null)
-
-    try {
-      const response = await fetch(`/api/linkedin/articles?count=${count}`)
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Erreur lors de la récupération des articles')
-      }
-
-      if (data.success) {
-        setArticles(data.articles)
-      } else {
-        throw new Error(data.message || 'Erreur inconnue')
-      }
-    } catch (err: any) {
-      console.error('Error fetching articles:', err)
-      setError(err.message)
-      
-      // If authentication error, reset auth state
-      if (err.message.includes('authenticate') || err.message.includes('expired')) {
-        setIsAuthenticated(false)
-        linkedInAuth.logout()
-      }
-    } finally {
-      setLoading(false)
-    }
-  }, [count])
+  }, [fetchArticles])
 
   // Fetch articles when authenticated
   useEffect(() => {

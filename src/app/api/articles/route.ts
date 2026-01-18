@@ -19,12 +19,20 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const offset = parseInt(searchParams.get('offset') || '0')
     const tag = searchParams.get('tag')
+    const isAdmin = isAuthenticated(request)
 
-    const where = tag ? {
-      tags: {
+    const where: any = {}
+
+    // Only filter by published if not admin
+    if (!isAdmin) {
+      where.published = true
+    }
+
+    if (tag) {
+      where.tags = {
         has: tag
       }
-    } : {}
+    }
 
     const articles = await prisma.article.findMany({
       where,
@@ -62,7 +70,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { title, excerpt, content, readTime, url, image, tags } = body
+    const { title, excerpt, content, readTime, url, image, tags, published, shareToLinkedin } = body
 
     if (!title || !excerpt || !content) {
       return NextResponse.json(
@@ -79,8 +87,33 @@ export async function POST(request: NextRequest) {
       readTime: readTime || '5 min',
       url: url || '',
       image,
-      tags: tags || []
+      tags: tags || [],
+      published: published || false
     })
+
+    // Handle LinkedIn sharing
+    let linkedinPostUrl = null
+    if (published && shareToLinkedin && url) {
+      try {
+        const { linkedInAPI } = await import('@/lib/linkedin/api')
+        linkedinPostUrl = await linkedInAPI.shareArticle({
+          title,
+          excerpt,
+          url
+        })
+
+        // Update article with LinkedIn URL
+        await mongoService.updateArticle(article.id, {
+          linkedinPostUrl
+        })
+
+        // Return article with LinkedIn URL
+        article.linkedinPostUrl = linkedinPostUrl
+      } catch (error) {
+        console.error('Error sharing to LinkedIn:', error)
+        // Don't fail the request, just log the error
+      }
+    }
 
     return NextResponse.json(article, { status: 201 })
   } catch (error) {

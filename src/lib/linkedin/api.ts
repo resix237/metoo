@@ -4,7 +4,54 @@ import { linkedInAuth } from './auth'
 export class LinkedInAPI {
   private static instance: LinkedInAPI
 
-  private constructor() {}
+  private constructor() { }
+
+  /**
+   * Share an article to LinkedIn
+   */
+  public async shareArticle(article: {
+    title: string
+    excerpt: string
+    url: string
+  }): Promise<string> {
+    const profile = await this.getProfile()
+    const authorUrn = `urn:li:person:${profile.id}`
+
+    const body = {
+      author: authorUrn,
+      lifecycleState: 'PUBLISHED',
+      specificContent: {
+        'com.linkedin.ugc.ShareContent': {
+          shareCommentary: {
+            text: `${article.excerpt}\n\nRead more: ${article.url}`
+          },
+          shareMediaCategory: 'ARTICLE',
+          media: [
+            {
+              status: 'READY',
+              description: {
+                text: article.excerpt.substring(0, 200)
+              },
+              originalUrl: article.url,
+              title: {
+                text: article.title
+              }
+            }
+          ]
+        }
+      },
+      visibility: {
+        'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC'
+      }
+    }
+
+    const response = await this.makeRequest('/ugcPosts', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+
+    return `https://www.linkedin.com/feed/update/${response.id}`
+  }
 
   public static getInstance(): LinkedInAPI {
     if (!LinkedInAPI.instance) {
@@ -18,13 +65,13 @@ export class LinkedInAPI {
    */
   private async makeRequest(endpoint: string, options: RequestInit = {}): Promise<any> {
     const token = linkedInAuth.getAccessToken()
-    
+
     if (!token) {
       throw new Error('No access token available')
     }
 
     const url = `${LINKEDIN_CONFIG.API_BASE_URL}${endpoint}`
-    
+
     const response = await fetch(url, {
       ...options,
       headers: {
@@ -66,9 +113,9 @@ export class LinkedInAPI {
   public async getPosts(count: number = 10): Promise<LinkedInPost[]> {
     const profile = await this.getProfile()
     const authorUrn = `urn:li:person:${profile.id}`
-    
+
     const endpoint = `/ugcPosts?q=authors&authors=${encodeURIComponent(authorUrn)}&count=${count}&sortBy=CREATED`
-    
+
     const response = await this.makeRequest(endpoint)
     return response.elements || []
   }
@@ -96,12 +143,12 @@ export class LinkedInAPI {
       const shareContent = post.specificContent?.['com.linkedin.ugc.ShareContent']
       const commentary = shareContent?.shareCommentary?.text || ''
       const media = shareContent?.media?.[0]
-      
+
       // Extract title from first line or first sentence
       const title = this.extractTitle(commentary)
       const excerpt = this.extractExcerpt(commentary, title)
       const readTime = this.calculateReadTime(commentary)
-      
+
       return {
         id: post.id,
         title: title || `Article LinkedIn #${index + 1}`,
@@ -125,21 +172,21 @@ export class LinkedInAPI {
    */
   private extractTitle(content: string): string {
     if (!content) return ''
-    
+
     // Try to find a title-like pattern (first line, or text before first period/newline)
     const lines = content.split('\n')
     const firstLine = lines[0]?.trim()
-    
+
     if (firstLine && firstLine.length > 10 && firstLine.length < 100) {
       return firstLine
     }
-    
+
     // Try first sentence
     const firstSentence = content.split(/[.!?]/)[0]?.trim()
     if (firstSentence && firstSentence.length > 10 && firstSentence.length < 100) {
       return firstSentence
     }
-    
+
     // Fallback to first 60 characters
     return content.substring(0, 60).trim() + (content.length > 60 ? '...' : '')
   }
@@ -149,17 +196,17 @@ export class LinkedInAPI {
    */
   private extractExcerpt(content: string, title: string): string {
     if (!content) return ''
-    
+
     // Remove title from content if it's at the beginning
     let excerptContent = content
     if (title && content.startsWith(title)) {
       excerptContent = content.substring(title.length).trim()
     }
-    
+
     // Get first few sentences or first 150 characters
     const sentences = excerptContent.split(/[.!?]/)
     let excerpt = ''
-    
+
     for (const sentence of sentences) {
       if ((excerpt + sentence).length < 150) {
         excerpt += sentence + '. '
@@ -167,11 +214,11 @@ export class LinkedInAPI {
         break
       }
     }
-    
+
     if (!excerpt.trim()) {
       excerpt = excerptContent.substring(0, 150).trim() + (excerptContent.length > 150 ? '...' : '')
     }
-    
+
     return excerpt.trim()
   }
 
@@ -192,13 +239,13 @@ export class LinkedInAPI {
     try {
       // Try to get articles first
       let articles = await this.getArticles(count)
-      
+
       if (articles.length === 0) {
         // Fallback to posts
         const posts = await this.getPosts(count)
         articles = this.transformPostsToArticles(posts)
       }
-      
+
       return articles.slice(0, count)
     } catch (error) {
       console.error('Error fetching LinkedIn articles:', error)

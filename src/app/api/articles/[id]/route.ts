@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { mongoService } from '@/lib/mongodb-service'
 import { isAuthenticated } from '@/lib/auth'
 
 // GET /api/articles/[id] - Get single article (public)
@@ -53,25 +54,50 @@ export async function PUT(
     }
 
     const body = await request.json()
-    const { title, excerpt, content, readTime, url, image, tags } = body
+    const { title, excerpt, content, readTime, url, image, tags, published, linkedinPostUrl, shareToLinkedin } = body
 
-    const article = await prisma.article.update({
-      where: {
-        id: params.id
-      },
-      data: {
-        title,
-        excerpt,
-        content,
-        readTime,
-        url,
-        image,
-        tags,
-        updatedAt: new Date()
+    // Handle LinkedIn sharing if requested and not yet shared
+    let finalLinkedinPostUrl = linkedinPostUrl
+    if (published && shareToLinkedin && url && !linkedinPostUrl) {
+      try {
+        const { linkedInAPI } = await import('@/lib/linkedin/api')
+        finalLinkedinPostUrl = await linkedInAPI.shareArticle({
+          title,
+          excerpt,
+          url
+        })
+      } catch (error) {
+        console.error('Error sharing to LinkedIn:', error)
       }
+    }
+
+    const success = await mongoService.updateArticle(params.id, {
+      title,
+      excerpt,
+      content,
+      readTime,
+      url,
+      image,
+      tags,
+      published,
+      linkedinPostUrl: finalLinkedinPostUrl,
+      updatedAt: new Date()
     })
 
-    return NextResponse.json(article)
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Article non trouvé' },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json({
+      id: params.id,
+      title,
+      excerpt,
+      linkedinPostUrl: finalLinkedinPostUrl,
+      published
+    })
   } catch (error) {
     console.error('Error updating article:', error)
     return NextResponse.json(
@@ -94,11 +120,14 @@ export async function DELETE(
       )
     }
 
-    await prisma.article.delete({
-      where: {
-        id: params.id
-      }
-    })
+    const success = await mongoService.deleteArticle(params.id)
+
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Article non trouvé' },
+        { status: 404 }
+      )
+    }
 
     return NextResponse.json(
       { message: 'Article supprimé avec succès' },

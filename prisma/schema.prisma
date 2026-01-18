@@ -20,6 +20,8 @@ model Article {
   url       String?
   image     String?
   tags      String[]
+  published Boolean  @default(false)
+  linkedinPostUrl String?
   likes     Int      @default(0)
   comments  Int      @default(0)
   shares    Int      @default(0)
