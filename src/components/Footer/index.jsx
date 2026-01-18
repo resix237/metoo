@@ -71,9 +71,8 @@ function Footer() {
                     Number of visitors
                 </span>
                 <div align="center">
-                    <a href='https://www.counter12.com'>
-                        <img className=' lg:h-4 h-3' src='https://www.counter12.com/img-d9cZ5dZC3ybzZAWA-79.gif' border='0' alt='free web counter' />
-                    </a>
+
+                    <img className=' lg:h-4 h-3' src='https://www.counter12.com/img-d9cZ5dZC3ybzZAWA-79.gif' border='0' alt='free web counter' />
                     <script type='text/javascript' src='https://www.counter12.com/ad.js?id=d9cZ5dZC3ybzZAWA'>
                     </script>
                 </div>
